@@ -26,19 +26,73 @@ def is_board_full(board):
     return all(cell != " " for row in board for cell in row)
 
 
+def get_empty_cells(board):
+    return [(row, col) for row in range(3) for col in range(3) if board[row][col] == " "]
+
+
+def minimax(board, depth, is_maximizing):
+    scores = {
+        "X": -1,
+        "O": 1,
+        "Tie": 0,
+    }
+
+    if check_winner(board, "X"):
+        return scores["X"]
+    elif check_winner(board, "O"):
+        return scores["O"]
+    elif is_board_full(board):
+        return scores["Tie"]
+
+    if is_maximizing:
+        best_score = float("-inf")
+        for row, col in get_empty_cells(board):
+            board[row][col] = "O"
+            score = minimax(board, depth + 1, False)
+            board[row][col] = " "
+            best_score = max(score, best_score)
+        return best_score
+    else:
+        best_score = float("inf")
+        for row, col in get_empty_cells(board):
+            board[row][col] = "X"
+            score = minimax(board, depth + 1, True)
+            board[row][col] = " "
+            best_score = min(score, best_score)
+        return best_score
+
+
+def get_best_move(board):
+    best_move = None
+    best_score = float("-inf")
+
+    for row, col in get_empty_cells(board):
+        board[row][col] = "O"
+        score = minimax(board, 0, False)
+        board[row][col] = " "
+
+        if score > best_score:
+            best_score = score
+            best_move = (row, col)
+
+    return best_move
+
 def main():
     board = [[" " for _ in range(3)] for _ in range(3)]
     current_player = "X"
     winner = None
 
     print("Welcome to Tic Tac Toe!\n")
-
     while True:
         print_board(board)
 
-        row = int(input(f"\nPlayer {current_player}, enter row (0, 1, 2): "))
-        col = int(input(f"Player {current_player}, enter column (0, 1, 2): "))
-        print(" ")
+        if current_player == "X":
+            row = int(input(f"\nPlayer {current_player}, enter row (0, 1, 2): "))
+            col = int(input(f"Player {current_player}, enter column (0, 1, 2): "))
+            print(" ")
+        else:
+            print("AI is thinking...\n")
+            row, col = get_best_move(board)
 
         if board[row][col] == " ":
             board[row][col] = current_player
