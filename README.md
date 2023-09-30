@@ -3,8 +3,6 @@
 ## Table of Contents
 - [Description](#description)
 - [Features](#features)
-- [Demo](#demo)
-  - [Screenshots](#screenshots)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
