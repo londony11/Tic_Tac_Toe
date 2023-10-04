@@ -8,8 +8,6 @@
   - [Installation](#installation)
 - [Usage](#usage)
 - [Opponent Algorithm](#opponent-algorithm)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Description
 This is a simple implementation of the classic Tic Tac Toe game in Python.
@@ -50,10 +48,3 @@ It explores all possible moves to find the best one, maximizing its chances of w
 
 ![img.png](img.png)
 source: https://media.geeksforgeeks.org/wp-content/uploads/TIC_TAC.jpg
-
-## Contributing
-Contributions are welcome! If you'd like to contribute to this project, please follow our Contributing Guidelines.
-
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
-
